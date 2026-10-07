@@ -1,0 +1,178 @@
+:root {
+    --white-color: #F6F6F6;
+    --blue-color: #3174C3;
+}
+
+.container {
+    border: 2px solid var(--blue-color);
+    border-radius: 10px;
+    background-color: #202020;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.reg-container {
+    /* border: 1px solid #ff0000; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 50%;
+}
+
+.text {
+    text-align: center;
+    color: var(--white-color);
+    margin-bottom: 4px;
+}
+
+.forgot {
+    display: flex;
+    flex-direction: row;
+    color: #F6F6F6;
+    font-size: 15px;
+}
+
+.pass-input {
+    border: 1px solid #312d2d;
+    width: 300px;
+    height: 20px;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: #323232;
+}
+
+/* .input:focus {
+    border-width: 2px;          
+    border-color: #212d9c;
+    не работає (хз чого)
+} */
+
+.button {
+    border: 1px solid var(--blue-color);
+    width: 320px;
+    height: 35px;
+    border-radius: 10px;
+    padding: 8px;
+    
+    background-color: var(--blue-color);
+    color: var(--white-color);
+}
+
+.button:hover {
+    filter:brightness(0.75);
+}
+
+.h2 {
+    color: var(--white-color);
+    margin: 0;
+}
+
+.display {
+    display: flex;
+}
+
+.vertical-line {
+  border: none;
+  border-left: 1px solid #303030;
+  margin: 0 15px;
+  align-self: stretch;
+  height: auto;
+}
+
+.photo-button-div {
+    /* border: 1px solid #ff0000; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30%
+}
+
+.photo-button {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #3174C3;
+    border: none;
+    margin: 5px;
+    text-align: right;
+    padding-right: 20px;
+    color: var(--white-color);
+}
+
+button img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reg-button {
+    border: 1px solid var(--blue-color);
+    border-radius: 10px;
+    width: 60px;
+    height: 25px;
+    padding:3px;
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-5px);
+}
+
+.reg-button:active {
+    background-color: var(--blue-color);
+}
+
+
+.switch-mode-container {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.switch-btn {
+  background: none;
+  border: none;
+  color: var(--blue-color);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 0;
+}
+
+.switch-btn:hover {
+  color: var(--blue-color);
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Затінення */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Вікно поверх усього контенту */
+}
+
+.ref {
+    display: flex;
+    color:var(--blue-color);
+    margin-left: 5px;
+    font-size: 15px;
+}   
