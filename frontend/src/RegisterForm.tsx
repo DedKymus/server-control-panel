@@ -12,10 +12,11 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mode, setMode] = useState<'login' | 'register'>('register');
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (!isOpen) return null; // Якщо вікно закрите — нічого не рендеримо
+  if (!isOpen) return null;
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
 
     if (mode === 'register') {
@@ -23,12 +24,29 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
         alert('Паролі не збігаються!');
         return;
       }
-      console.log('registering: ', { email, password });
-    } else {
-      console.log('logining: ', { email, password });
     }
 
-    setIsLoggedIn(true);
+    setIsLoading(true);
+
+    try {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (email === 'error@test.com') {
+            reject(new Error('Цей email вже зайнятий!'));
+          } else {
+            resolve({ success: true, token: 'fake-jwt-token-12345' });
+          }
+        }, 1000);
+      });
+
+      console.log(mode === 'register' ? 'Успішна реєстрація:' : 'Успішний вхід:', { email, password });
+      setIsLoggedIn(true); // Авторизуємо ТІЛЬКИ після успішного завершення запиту!
+
+    } catch (error: any) {
+      alert(error.message || 'error');
+    } finally {
+      setIsLoading(false); // Вимикаємо завантаження в будь-якому випадку
+    }
   };
 
   const toggleMode = () => {
@@ -105,8 +123,8 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
                   </div>
                 )}
 
-                <button type="submit" className='button'>
-                  {mode === 'register' ? 'Register' : 'Log in'}
+                <button type="submit" className='button' disabled={isLoading}>
+                  {isLoading ? 'Loading...' : (mode === 'register' ? 'Register' : 'Log in')}
                 </button>
                 <p className='forgot'>Forgot password? 
                   <a className='ref' href="https://lnk.ua/FqKoi5Gu7"> reset</a>
