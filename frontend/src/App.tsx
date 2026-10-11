@@ -1,24 +1,33 @@
 import { useState } from 'react';
 import { RegisterForm } from "./RegisterForm";
+import { Header } from './Header';
 import './RegisterForm.css'
+import './Header.css'
 
 function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserEmail('');
+  }
 
   return (
-    <div style={{ padding: '20px', color: '#fff', backgroundColor: '#121212', minHeight: '100vh' }}>
-      <header>
-        <h1>Some text</h1>
-        <button className='button' onClick={() => setIsAuthOpen(true)}>
-          Log in / Register
-        </button>
-      </header>
+    <div>
+      <Header
+        onOpenAuth={() => setIsAuthOpen(true)} 
+        isLoggedIn={isLoggedIn}
+        email={userEmail}
+        onLogout={handleLogout}
+      />
 
       <main>
         <p>Main page content...</p>
       </main>
 
-      {/* Модальне вікно форми */}
+      {/* modal window */}
       <RegisterForm 
         isOpen={isAuthOpen} 
         onClose={() => setIsAuthOpen(false)} 

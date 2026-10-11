@@ -21,7 +21,7 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
 
     if (mode === 'register') {
       if (password !== confirmPassword) {
-        alert('Паролі не збігаються!');
+        alert('passwords do not match');
         return;
       }
     }
@@ -32,20 +32,20 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
       await new Promise((resolve, reject) => {
         setTimeout(() => {
           if (email === 'error@test.com') {
-            reject(new Error('Цей email вже зайнятий!'));
+            reject(new Error('This email aleady used'));
           } else {
             resolve({ success: true, token: 'fake-jwt-token-12345' });
           }
         }, 1000);
       });
 
-      console.log(mode === 'register' ? 'Успішна реєстрація:' : 'Успішний вхід:', { email, password });
-      setIsLoggedIn(true); // Авторизуємо ТІЛЬКИ після успішного завершення запиту!
+      console.log(mode === 'register' ? 'Successful registration:' : 'Successful log in:', { email, password });
+      setIsLoggedIn(true);
 
     } catch (error: any) {
       alert(error.message || 'error');
     } finally {
-      setIsLoading(false); // Вимикаємо завантаження в будь-якому випадку
+      setIsLoading(false);
     }
   };
 
@@ -77,10 +77,10 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
           <form onSubmit={handleSubmit}>
             <div className='display'>
               
-              {/* Ліва колонка */}
+              {/* Left col */}
               <div className='reg-container'>
                 <div className='row'>
-                  <h2 className='h2'>{mode === 'register' ? 'Register' : 'Log in'}</h2>
+                  <h2 className='h2'>{mode === 'register' ? 'Sign up' : 'Log in'}</h2>
                   <div className='switch-mode-container'>
                     <button type="button" className='reg-button' onClick={toggleMode}>
                       {mode === 'register' ? "Log in" : "Register"}
@@ -127,13 +127,13 @@ export function RegisterForm({ isOpen, onClose }: RegisterFormProps) {
                   {isLoading ? 'Loading...' : (mode === 'register' ? 'Register' : 'Log in')}
                 </button>
                 <p className='forgot'>Forgot password? 
-                  <a className='ref' href="https://lnk.ua/FqKoi5Gu7"> reset</a>
+                  <a className='ref' href=" "> reset</a>
                   </p>
               </div>
 
               <hr className="vertical-line" />
 
-              {/* Права колонка */}
+              {/* right col */}
               <div className='reg-container'>
                 <div className='photo-button-div'>
                   <p className='text'>Quick sign up</p>
