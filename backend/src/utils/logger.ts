@@ -1,6 +1,5 @@
 import pino from 'pino';
 
-const isProd = process.env.NODE_ENV === 'production';
 
 export interface ILogger {
     info(msg: string, ...args: any[]): void;
@@ -8,15 +7,17 @@ export interface ILogger {
     error(msg: string, ...args: any[]): void;
 }
 
-export const logger : ILogger = pino({
-    level: isProd ? 'error' : 'info',
-    ...(!isProd && {
-        transport: {
-            target: 'pino-pretty',
-            options: {
-                colorize: true,
-                translateTime: 'SYS:standard',
+export const createLogger = (isProd: boolean): ILogger => {
+    return pino({
+        level: isProd ? 'error' : 'info',
+        ...(!isProd && {
+            transport: {
+                target: 'pino-pretty',
+                options: {
+                    colorize: true,
+                    translateTime: 'SYS:standard',
+                },
             },
-        },
-    }),
-});
+        }),
+    });
+};

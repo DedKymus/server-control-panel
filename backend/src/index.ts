@@ -1,23 +1,20 @@
-import express from 'express';
-import * as http from 'http';
+import 'dotenv/config';
+import { createLogger } from './utils/logger.js';
+import { AuthController } from './controllers/auth.controller.js';
+import { Server } from './server/server.js';
 
-const app = express();
-app.use(express.json());
+const port = Number(process.env.PORT) || 8080;
+const isProd = process.env.NODE_ENV === 'production';
+const jwtSecret = process.env.JWT_SECRET || 'secret_dev_key';
 
-const server = http.createServer(app);
-const port = 8080
+const logger = createLogger(isProd);
 
-app.post('/api/register', (req, res) => {
-    const data = req.body;
-    console.log("registration:", data);
+const authController = new AuthController(logger, jwtSecret);
 
-    res.json({
-        status: 200,
-        msg: "register successfully",
-    })
-})
+const server = new Server (
+    {port , isProd},
+    logger,
+    authController
+)
 
-server.listen(port,() => {
-   console.log(`server listening on ${port}`);
-});
-
+server.start()
