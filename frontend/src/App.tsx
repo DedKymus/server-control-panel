@@ -3,6 +3,7 @@ import { RegisterForm } from "./RegisterForm";
 import { Header } from './Header';
 import './RegisterForm.css'
 import './Header.css'
+import './App.css'
 
 function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
