@@ -1,10 +1,7 @@
 body {
-  /* Базовий колір фону сторінки */
   background-color: #010101; 
 
-  /* Створення фону з крапок */
   background-image: radial-gradient(#171918 1px, transparent 1px);
   
-  /* Відстань між крапками (ширина і висота сітки) */
   background-size: 40px 40px;
 }
